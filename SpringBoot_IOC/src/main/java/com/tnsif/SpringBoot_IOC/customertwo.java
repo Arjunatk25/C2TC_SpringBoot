@@ -1,0 +1,38 @@
+package com.tnsif.SpringBoot_IOC;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class customertwo {
+  private int id;
+  private String name;
+  private String city;
+  public int getId() {
+	return id;
+  }
+  public customertwo() {
+	
+	System.out.println("One Customer");
+	
+}
+  public void setId(int id) {
+	this.id = id;
+  }
+  public String getName() {
+	return name;
+  }
+  public void setName(String name) {
+	this.name = name;
+  }
+  public String getCity() {
+	return city;
+  }
+  public void setCity(String city) {
+	this.city = city;
+  }
+
+  public void order()
+  {
+	 System.out.println("Class Customer two obj created");
+  }
+}
