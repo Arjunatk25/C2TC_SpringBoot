@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+.image-container {
+    display: flex;
+    justify-content: center;   /* centers images horizontally */
+    align-items: center;       /* aligns images vertically */
+    flex-wrap: wrap;           /* allows wrapping on smaller screens */
+    gap: 20px;                 /* space between images */
+    margin-top: 30px;
+}
+
+.image-container img {
+    width: 200px;              /* fixed width for consistency */
+    height: auto;              /* keeps aspect ratio */
+    border-radius: 8px;        /* optional rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* subtle shadow */
+    transition: transform 0.3s ease;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);    /* zoom effect on hover */
+}
+
+/* Petal rain overlay */
+.petal-rain {
+  position: fixed;
+  inset: -2vh 0 0 0;     /* start slightly above the top */
+  pointer-events: none;  /* don't block clicks */
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Base petal */
+.petal-rain span {
+  position: absolute;
+  top: -10vh;                      /* start above the screen */
+  left: calc(var(--x, 50) * 1%);   /* randomized horizontal start */
+  width: var(--w, 12px);
+  height: var(--h, 18px);
+  background:
+    radial-gradient(60% 60% at 40% 35%, #ffffff55 0 45%, transparent 46%),
+    linear-gradient(180deg, #ff8fb3, #ff5d8f);
+  border-radius: 60% 60% 60% 0;    /* teardrop shape */
+  transform: rotate(calc(var(--rot, 40) * 1deg));
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.22));
+  opacity: var(--op, 0.95);
+  animation:
+    fall var(--dur, 9s) linear infinite,
+    sway var(--sway, 4s) ease-in-out infinite alternate;
+}
+
+/* Falling straight down (animate top so we can still use transform for sway) */
+@keyframes fall {
+  to { top: 110vh; }
+}
+
+/* Gentle horizontal drift */
+@keyframes sway {
+  from { margin-left: -22px; }
+  to   { margin-left: 22px; }
+}
+
+/* A bunch of natural-looking variations */
+.petal-rain span:nth-child(4n+1){ --w:10px; --h:16px; --rot:35;  --op:.9;  --sway:3.5s; }
+.petal-rain span:nth-child(4n+2){ --w:14px; --h:22px; --rot:55;  --op:1;   --sway:4.5s; }
+.petal-rain span:nth-child(4n+3){ --w:12px; --h:20px; --rot:15;  --op:.85; --sway:5s; }
+.petal-rain span:nth-child(4n+4){ --w:16px; --h:24px; --rot:70;  --op:.95; --sway:3.8s; }
+
+/* Different columns, speeds, and delays */
+.petal-rain span:nth-child(1){  --x: 5;  --dur:10s; animation-delay: 0s;   }
+.petal-rain span:nth-child(2){  --x:12;  --dur:11s; animation-delay:-2s;   }
+.petal-rain span:nth-child(3){  --x:18;  --dur: 9s; animation-delay:-4s;   }
+.petal-rain span:nth-child(4){  --x:25;  --dur:12s; animation-delay:-1s;   }
+.petal-rain span:nth-child(5){  --x:32;  --dur: 8s; animation-delay:-3s;   }
+.petal-rain span:nth-child(6){  --x:38;  --dur:10s; animation-delay:-6s;   }
+.petal-rain span:nth-child(7){  --x:45;  --dur:13s; animation-delay:-2.5s; }
+.petal-rain span:nth-child(8){  --x:52;  --dur: 9s; animation-delay:-5.2s; }
+.petal-rain span:nth-child(9){  --x:58;  --dur:11s; animation-delay:-1.8s; }
+.petal-rain span:nth-child(10){ --x:65;  --dur:10s; animation-delay:-7s;   }
+.petal-rain span:nth-child(11){ --x:71;  --dur:12s; animation-delay:-3.7s; }
+.petal-rain span:nth-child(12){ --x:78;  --dur: 8s; animation-delay:-6.5s; }
+.petal-rain span:nth-child(13){ --x:84;  --dur: 9s; animation-delay:-2.2s; }
+.petal-rain span:nth-child(14){ --x:90;  --dur:13s; animation-delay:-4.4s; }
+.petal-rain span:nth-child(15){ --x:96;  --dur:10s; animation-delay:-5.9s; }
+.petal-rain span:nth-child(16){ --x:3;   --dur:12s; animation-delay:-7.3s; }
+.petal-rain span:nth-child(17){ --x:14;  --dur: 9s; animation-delay:-8.1s; }
+.petal-rain span:nth-child(18){ --x:27;  --dur:11s; animation-delay:-6.8s; }
+.petal-rain span:nth-child(19){ --x:41;  --dur:10s; animation-delay:-9.5s; }
+.petal-rain span:nth-child(20){ --x:67;  --dur:12s; animation-delay:-8.6s; }
+
+/* Optional: a second colorway for variety */
+.petal-rain span.alt {
+  background:
+    radial-gradient(60% 60% at 40% 35%, #ffffff55 0 45%, transparent 46%),
+    linear-gradient(180deg, #ffa6c4, #ff76a7);
+}
